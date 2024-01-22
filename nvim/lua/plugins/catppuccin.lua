@@ -10,6 +10,9 @@ return {
   config = function(_, opts)
     require('catppuccin').setup(opts)
     vim.cmd.colorscheme "catppuccin-mocha"
-    vim.o.guifont = "Iosevka Fixed Medium:h11"
+    local is_mac = vim.fn.has("mac") == 1
+    if not is_mac then
+        vim.o.guifont = "Iosevka Fixed Medium:h11"
+    end
   end
 }
