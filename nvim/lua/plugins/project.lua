@@ -4,6 +4,7 @@ return {
     projects = { -- define project roots
       "~/code/*",
       "~/.config/*",
+      "~/code/zendesk/*",
     },
   },
   init = function()
