@@ -1,4 +1,5 @@
 require("j.buffers")
+require("j.files")
 require("j.windows")
 
 vim.opt.scrolloff = 8

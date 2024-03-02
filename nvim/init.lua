@@ -578,7 +578,8 @@ local servers = {
   jsonnet_ls = {},
   -- pyright = {},
   rust_analyzer = {},
-  -- tsserver = {},
+  svelte = {},
+  tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
