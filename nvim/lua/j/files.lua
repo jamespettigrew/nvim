@@ -39,7 +39,7 @@ vim.keymap.set("n", "<leader>fS",
                         prompt = 'File ' .. entry.path .. ' exists; overwrite?',
                     }, function(choice)
                         if choice == 'Yes' then
-                            vim.cmd.saveas { entry.path, bang = true }
+                            vim.cmd.saveas { entry.path, bang = true, mods = { silent = true } }
                         end
                     end)
                 end)
