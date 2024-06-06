@@ -5,6 +5,7 @@ return {
       "~/code/*",
       "~/.config/*",
       "~/code/zendesk/*",
+      "~/code/personal/*",
     },
   },
   init = function()
