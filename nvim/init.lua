@@ -229,7 +229,15 @@ require('lazy').setup({
           return vim.fn.executable 'make' == 1
         end,
       },
+      'jonarrien/telescope-cmdline.nvim',
     },
+    keys = {
+      { ':', '<cmd>Telescope cmdline<cr>', desc = 'Cmdline' }
+    },
+    config = function(_, opts)
+      require('telescope').setup(opts)
+      require('telescope').load_extension('cmdline')
+    end,
   },
 
   {
@@ -338,6 +346,11 @@ require('telescope').setup {
     },
   },
   extensions = {
+    cmdline = {
+      mappings = {
+        complete = '<Tab>',
+      },
+    },
     project = {
       base_dirs = {
         {'~/code', max_depth = 1},
