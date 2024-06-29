@@ -8,6 +8,6 @@ return {
   },
   config = function(_, opts)
     require("neogit").setup(opts)
-    vim.keymap.set("n", "<leader>gs", "<Cmd>:Neogit<CR>", { desc = "[S]tatus"})
+    vim.keymap.set("n", "<leader>gs", "<Cmd>:Neogit kind=vsplit<CR>", { desc = "[S]tatus"})
   end
 }
