@@ -2,6 +2,7 @@ require("j.buffers")
 require("j.files")
 require("j.notes")
 require("j.windows")
+require("j.workspaces")
 
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50

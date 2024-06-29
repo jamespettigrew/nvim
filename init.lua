@@ -230,16 +230,64 @@ require('lazy').setup({
         end,
       },
       'jonarrien/telescope-cmdline.nvim',
+      'nvim-telescope/telescope-project.nvim',
     },
     keys = {
       { ':', '<cmd>Telescope cmdline<cr>', desc = 'Cmdline' }
     },
     config = function(_, opts)
-      require('telescope').setup(opts)
+      -- [[ Configure Telescope ]]
+      -- See `:help telescope` and `:help telescope.setup()`
+      require('telescope').setup {
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-u>'] = false,
+              ['<C-d>'] = false,
+            },
+          },
+        },
+        extensions = {
+          cmdline = {
+            mappings = {
+              complete = '<Tab>',
+            },
+          },
+          project = {
+            base_dirs = {
+              {'~/code', max_depth = 3},
+              {'~/Code', max_depth = 3},
+              {'~/.config/*', max_depth = 3},
+            },
+            hidden_files = true, -- default: false
+            theme = "dropdown",
+            order_by = "desc",
+            search_by = "title",
+            sync_with_nvim_tree = false, -- default false
+            on_project_selected = function(prompt_bufnr)
+              local actions = require "telescope.actions"
+              local project_actions = require "telescope._extensions.project.actions"
+              local title = project_actions.get_selected_title(prompt_bufnr)
+              local path = project_actions.get_selected_path(prompt_bufnr)
+              vim.api.nvim_set_current_dir(path)
+              actions.close(prompt_bufnr)
+
+              vim.api.nvim_command("$tabnew")
+              vim.api.nvim_command("Tabby rename_tab " .. title)
+
+              local fb = require("telescope").extensions.file_browser
+              fb.file_browser()
+            end
+          }
+        }
+      }
+
+      -- Enable telescope fzf native, if installed
+      pcall(require('telescope').load_extension, 'fzf')
       require('telescope').load_extension('cmdline')
+      require('telescope').load_extension('project')
     end,
   },
-
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -334,45 +382,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Telescope ]]
--- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-  extensions = {
-    cmdline = {
-      mappings = {
-        complete = '<Tab>',
-      },
-    },
-    project = {
-      base_dirs = {
-        {'~/code', max_depth = 1},
-      },
-      hidden_files = true, -- default: false
-      theme = "dropdown",
-      order_by = "asc",
-      search_by = "title",
-      sync_with_nvim_tree = true, -- default false
-    }
-  }
-}
-
-
-vim.keymap.set(
-    'n',
-    '<leader>ps',
-    ":lua require'telescope'.extensions.project.project{}<CR>"
-)
-
--- Enable telescope fzf native, if installed
-pcall(require('telescope').load_extension, 'fzf')
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -430,7 +439,6 @@ end
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })

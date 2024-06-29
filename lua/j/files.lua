@@ -1,3 +1,6 @@
+vim.keymap.set("n", "<leader>fb", "<Cmd>:Telescope file_browser path=%:p:h<CR>", { desc = "Browse Files" })
+vim.keymap.set("n", "<leader>ff", require("telescope.builtin").git_files, { desc = "Find Files" })
+
 vim.keymap.set("n", "<leader>fs",
     function()
         vim.lsp.buf.format()
@@ -35,10 +38,10 @@ vim.keymap.set("n", "<leader>fS",
                         return
                     end
 
-                    vim.ui.select({ 'Yes', 'No' }, {
-                        prompt = 'File ' .. entry.path .. ' exists; overwrite?',
+                    vim.ui.select({ "Yes", "No" }, {
+                        prompt = "File " .. entry.path .. " exists; overwrite?",
                     }, function(choice)
-                        if choice == 'Yes' then
+                        if choice == "Yes" then
                             vim.cmd.saveas { entry.path, bang = true, mods = { silent = true } }
                         end
                     end)
