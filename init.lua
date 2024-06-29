@@ -275,8 +275,7 @@ require('lazy').setup({
               vim.api.nvim_command("$tabnew")
               vim.api.nvim_command("Tabby rename_tab " .. title)
 
-              local fb = require("telescope").extensions.file_browser
-              fb.file_browser()
+              require("telescope.builtin").git_files{}
             end
           }
         }
