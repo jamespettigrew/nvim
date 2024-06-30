@@ -1,5 +1,5 @@
 vim.keymap.set("n", "<leader>fb", "<Cmd>:Telescope file_browser path=%:p:h<CR>", { desc = "Browse Files" })
-vim.keymap.set("n", "<leader>ff", require("telescope.builtin").git_files, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find Files" })
 
 vim.keymap.set("n", "<leader>fs",
     function()
