@@ -269,13 +269,9 @@ require('lazy').setup({
               local project_actions = require "telescope._extensions.project.actions"
               local title = project_actions.get_selected_title(prompt_bufnr)
               local path = project_actions.get_selected_path(prompt_bufnr)
-              vim.api.nvim_set_current_dir(path)
               actions.close(prompt_bufnr)
 
-              vim.api.nvim_command("$tabnew")
-              vim.api.nvim_command("Tabby rename_tab " .. title)
-
-              require("telescope.builtin").find_files{}
+              require('j.workspaces').open_workspace(title, path)
             end
           }
         }
