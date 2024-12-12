@@ -272,6 +272,7 @@ require('lazy').setup({
               actions.close(prompt_bufnr)
 
               require('j.workspaces').open_workspace(title, path)
+              require("telescope.builtin").find_files{}
             end
           }
         }
