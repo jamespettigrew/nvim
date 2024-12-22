@@ -255,9 +255,7 @@ require('lazy').setup({
           },
           project = {
             base_dirs = {
-              {'~/code', max_depth = 3},
-              {'~/Code', max_depth = 3},
-              {'~/.config/*', max_depth = 3},
+              {'~/code', max_depth = 1},
             },
             hidden_files = true, -- default: false
             theme = "dropdown",

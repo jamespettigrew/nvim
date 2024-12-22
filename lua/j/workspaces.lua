@@ -64,6 +64,7 @@ function M._previous_workspace()
 end
 
 function M._focus_workspace(w)
+  print("FOCUSING " .. w.tabpage)
   if w.path ~= "" then
     vim.api.nvim_set_current_dir(w.path)
   else
@@ -103,7 +104,8 @@ end
 
 function M._tab_closed()
     local tabpages = {}
-    for _, tabpage in pairs(vim.api.nvim_list_tabpages()) do
+    for k, tabpage in pairs(vim.api.nvim_list_tabpages()) do
+      print(k .. " " .. tabpage)
       tabpages[tabpage] = true
     end
 
@@ -115,8 +117,21 @@ function M._tab_closed()
     end
 
     for workspace_id in pairs(orphan_workspaces) do
+      print("ORPHAN " .. workspace_id)
       table.remove(M._workspaces, workspace_id)
     end
+
+  -- temp
+    print("WORKSPACES:")
+    for k, w in pairs(M._workspaces) do
+      print(k .. " " .. w.tabpage .. w.title)
+    end
+
+    print("HISTORY:")
+    for _, w in pairs(M._workspace_history) do
+      print(w)
+    end
+  -- 
 
     local prev = M._previous_workspace()
     if prev then

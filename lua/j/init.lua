@@ -1,6 +1,8 @@
 require("j.buffers")
 require("j.files")
 require("j.notes")
+require("j.terminals")
+require("j.term-scope").setup()
 require("j.windows")
 require("j.workspaces").setup()
 
