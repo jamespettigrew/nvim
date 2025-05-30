@@ -681,9 +681,6 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
     { name = 'path' },
-    { name = 'obsidian' },
-    { name = 'obsidian_new' },
-    { name = 'obsidian_tags' },
   },
 }
 
