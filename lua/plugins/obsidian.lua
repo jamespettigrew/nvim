@@ -1,5 +1,5 @@
 return {
-  "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
   version = "*",  -- recommended, use latest release instead of latest commit
   lazy = false,
   ft = "markdown",
@@ -52,10 +52,11 @@ return {
       template = nil
     },
 
-    -- Optional, completion of wiki links, local markdown links, and tags using nvim-cmp.
+    -- Optional, completion of wiki links, local markdown links, and tags using blink.
     completion = {
+      blink = true,
+      nvim_cmp = false,
       -- Set to false to disable completion.
-      nvim_cmp = true,
       -- Trigger completion at 2 chars.
       min_chars = 2,
     },
@@ -187,13 +188,6 @@ return {
       vim.fn.jobstart({"open", url})  -- Mac OS
       -- vim.fn.jobstart({"xdg-open", url})  -- linux
     end,
-
-    -- Optional, set to true if you use the Obsidian Advanced URI plugin.
-    -- https://github.com/Vinzent03/obsidian-advanced-uri
-    use_advanced_uri = false,
-
-    -- Optional, set to true to force ':ObsidianOpen' to bring the app to the foreground.
-    open_app_foreground = false,
 
     picker = {
       -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
