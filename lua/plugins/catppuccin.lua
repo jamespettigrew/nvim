@@ -9,10 +9,15 @@ return {
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
     },
     integrations = {
-      cmp = true,
+      blink_cmp = {
+        style = 'bordered',
+      },
       neogit = true,
+      noice = true,
+      notify = true,
       nvimtree = true,
       treesitter = true,
+      which_key = true,
     },
   },
   config = function(_, opts)

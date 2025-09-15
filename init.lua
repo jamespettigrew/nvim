@@ -473,11 +473,7 @@ require('lazy').setup({
           return vim.fn.executable 'make' == 1
         end,
       },
-      'jonarrien/telescope-cmdline.nvim',
       'nvim-telescope/telescope-project.nvim',
-    },
-    keys = {
-      { ':', '<cmd>Telescope cmdline<cr>', desc = 'Cmdline' }
     },
     config = function(_, opts)
       -- [[ Configure Telescope ]]
@@ -492,11 +488,6 @@ require('lazy').setup({
           },
         },
         extensions = {
-          cmdline = {
-            mappings = {
-              complete = '<Tab>',
-            },
-          },
           project = {
             base_dirs = {
               { '~/code', max_depth = 2 },
@@ -522,7 +513,6 @@ require('lazy').setup({
 
       -- Enable telescope fzf native, if installed
       pcall(require('telescope').load_extension, 'fzf')
-      require('telescope').load_extension('cmdline')
       require('telescope').load_extension('project')
     end,
   },
