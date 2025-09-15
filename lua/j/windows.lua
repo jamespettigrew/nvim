@@ -1,9 +1,9 @@
 local t = require('telescope.builtin')
 
-require('which-key').register {
-  ['<leader>wv'] = { name = 'Split [v]ertical', _ = 'which_key_ignore' },
-  ['<leader>ws'] = { name = 'Split horizontal', _ = 'which_key_ignore' },
-}
+require('which-key').add({
+  { '<leader>wv', name = 'Split [v]ertical' },
+  { '<leader>ws', name = 'Split horizontal' },
+})
 
 vim.keymap.set("n", "<leader>wsn", "<Cmd>new<CR>", { desc = "New"})
 vim.keymap.set("n", "<leader>wsf", "<Cmd>split :Telescope find_files<CR>", { desc = "Find"})

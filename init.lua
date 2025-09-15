@@ -873,24 +873,15 @@ vim.defer_fn(function()
 end, 0)
 
 -- document existing key chains
-require('which-key').register {
-  ['<leader>b'] = { name = '[B]uffer', _ = 'which_key_ignore' },
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]indow', _ = 'which_key_ignore' },
-  ['<leader>p'] = { name = '[P]roject', _ = 'which_key_ignore' },
-  ['<leader><TAB>'] = { name = 'Workspaces', _ = 'which_key_ignore' },
-}
--- register which-key VISUAL mode
--- required for visual <leader>hs (hunk stage) to work
-require('which-key').register({
-  ['<leader>'] = { name = 'VISUAL <leader>' },
-  ['<leader>h'] = { 'Git [H]unk' },
-}, { mode = 'v' })
+require('which-key').add({
+  {'<leader>b', group = 'buffer', name = '[b]uffer' },
+  {'<leader>f', group = 'file', name = '[f]ile' },
+  {'<leader>g', group = 'git', name = '[g]it' },
+  {'<leader>s', group = 'search', name = '[s]earch' },
+  {'<leader>t', group = 'toggle', name = '[t]oggle' },
+  {'<leader>w', group = "window", name = '[w]indow' },
+  {'<leader><TAB>', group = 'workspace', name = 'Workspaces' },
+})
 
 vim.g.neovide_padding_top = 1
 vim.g.neovide_padding_bottom = 1
