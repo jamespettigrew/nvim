@@ -8,6 +8,7 @@ require("j.workspaces").setup()
 
 vim.opt.scrolloff = 8
 vim.opt.updatetime = 50
+vim.opt.tabstop = 4
 
 -- Keeps cursor centred in the screen while searching
 vim.keymap.set("n", "n", "nzzzv")
