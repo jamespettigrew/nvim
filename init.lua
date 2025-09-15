@@ -732,6 +732,7 @@ require('which-key').add({
   {'<leader>b', group = 'buffer', name = '[b]uffer' },
   {'<leader>f', group = 'file', name = '[f]ile' },
   {'<leader>g', group = 'git', name = '[g]it' },
+  {'<leader>n', group = 'notes', name = '[n]otes' },
   {'<leader>s', group = 'search', name = '[s]earch' },
   {'<leader>t', group = 'toggle', name = '[t]oggle' },
   {'<leader>w', group = "window", name = '[w]indow' },
