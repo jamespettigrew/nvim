@@ -12,6 +12,7 @@ return {
       blink_cmp = {
         style = 'bordered',
       },
+      gitsigns = true,
       neogit = true,
       noice = true,
       notify = true,
