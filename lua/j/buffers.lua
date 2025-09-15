@@ -1,4 +1,5 @@
 local t = require('telescope.builtin')
+local arena = require("arena")
 
 local function kill()
   local bufnr = vim.api.nvim_get_current_buf()
@@ -17,8 +18,8 @@ local function kill()
   end
 end
 
-vim.keymap.set("n", "<leader>bk", kill, { desc = "[k]ill", silent = true })
-vim.keymap.set("n", "<leader>bl", t.buffers, { desc = "[l]ist" })
+--vim.keymap.set("n", "<leader>bk", kill, { desc = "[k]ill", silent = true })
+vim.keymap.set("n", "<leader>bl", arena.toggle, { desc = "[l]ist" })
 vim.keymap.set("n", "<leader>bN", "<Cmd>enew<CR>", { desc = "[N]ew" })
 vim.keymap.set("n", "<leader>bn", "<Cmd>bnext<CR>", { desc = "[n]ext" })
 vim.keymap.set("n", "<leader>bp", "<Cmd>bprevious<CR>", { desc = "[p]revious" })
