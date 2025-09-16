@@ -745,6 +745,7 @@ vim.g.neovide_padding_top = 1
 vim.g.neovide_padding_bottom = 1
 vim.g.neovide_padding_right = 1
 vim.g.neovide_padding_left = 1
+vim.g.neovide_floating_corner_radius = 0.5
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
