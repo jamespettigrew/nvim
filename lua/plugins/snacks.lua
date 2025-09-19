@@ -8,9 +8,14 @@ return {
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
     bigfile = { enabled = true },
-    dashboard = { enabled = true },
+    dashboard = { enabled = false },
     explorer = { enabled = true },
-    indent = { enabled = true },
+    indent = {
+      enabled = true,
+      animate = {
+        enabled = false,
+      },
+    },
     input = { enabled = true },
     picker = { enabled = true },
     notifier = { enabled = true },

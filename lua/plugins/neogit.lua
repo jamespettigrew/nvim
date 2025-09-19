@@ -4,7 +4,7 @@ return {
     "nvim-lua/plenary.nvim",         -- required
     "sindrets/diffview.nvim",        -- optional - Diff integration
 
-    "nvim-telescope/telescope.nvim", -- optional
+    "folke/snacks.nvim", -- optional
   },
   opts = {
     kind = "replace",
@@ -43,6 +43,9 @@ return {
     },
     refs_view = {
       kind = "floating",
+    },
+    integrations = {
+      snacks = true,
     },
   },
   config = function(_, opts)

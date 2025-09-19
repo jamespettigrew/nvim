@@ -148,13 +148,41 @@ function M.setup()
   vim.keymap.set("n", "<leader><TAB>k", function() M.close_current_workspace() end, { desc = "Close this workspace" })
   vim.keymap.set("n", "<leader><TAB>o",
     function()
-      require'telescope'.extensions.project.project{display_type='full'}
+      Snacks.picker.projects({
+        dev = { "~/code" },
+        confirm = function(picker, item)
+          picker:close()
+          if not item then
+            return
+          end
+
+          local path = item.file
+          local split = path:split('/')
+          local title = split[#split]
+          M.open_workspace(title, path)
+          Snacks.picker.git_files()
+        end,
+        title = "Workspaces",
+      })
     end,
-    { desc = "Open project" })
+    { desc = "Open workspace" })
   vim.keymap.set("n", "<leader><TAB><TAB>", function() M.switch_workspace() end, { desc = "Switch workspace"  })
 
   vim.api.nvim_create_autocmd("TabEnter", { callback=M._tab_entered})
   vim.api.nvim_create_autocmd("TabClosed", { callback=M._tab_closed})
+end
+
+function string:split(delimiter)
+  local result = { }
+  local from  = 1
+  local delim_from, delim_to = string.find(self, delimiter, from  )
+  while delim_from do
+    table.insert( result, string.sub( self, from , delim_from-1 ) )
+    from  = delim_to + 1
+    delim_from, delim_to = string.find( self, delimiter, from  )
+  end
+  table.insert( result, string.sub( self, from  ) )
+  return result
 end
 
 return M

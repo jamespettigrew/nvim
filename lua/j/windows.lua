@@ -1,12 +1,16 @@
-local t = require('telescope.builtin')
-
 require('which-key').add({
   { '<leader>wv', name = 'Split [v]ertical' },
   { '<leader>ws', name = 'Split horizontal' },
 })
 
 vim.keymap.set("n", "<leader>wsn", "<Cmd>new<CR>", { desc = "New"})
-vim.keymap.set("n", "<leader>wsf", "<Cmd>split :Telescope find_files<CR>", { desc = "Find"})
+vim.keymap.set("n", "<leader>wsf",
+  function()
+    vim.api.nvim_command("split")
+    Snacks.picker.smart({
+      finder = "git_files",
+    })
+  end, { desc = "Find"})
 vim.keymap.set("n", "<leader>wst", "<Cmd>split :terminal<CR>", { desc = "Terminal"})
 vim.keymap.set("n", "<leader>wvn", "<Cmd>vertical :new<CR>", { desc = "New"})
 vim.keymap.set(
@@ -14,7 +18,9 @@ vim.keymap.set(
   "<leader>wvf",
   function()
     vim.api.nvim_command("vsplit")
-    t.find_files()
+    Snacks.picker.smart({
+      finder = "git_files",
+    })
   end,
   { desc = "Find"}
 )

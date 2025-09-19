@@ -1,6 +1,10 @@
-vim.keymap.set("n", "<leader>fb", "<Cmd>:Telescope file_browser path=%:p:h<CR>", { desc = "Browse Files" })
-vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find Files" })
-
+vim.keymap.set("n", "<leader>fb",
+    function()
+        Snacks.picker.explorer({
+            layout = { preset = "select", preview = true },
+        })
+    end, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
 vim.keymap.set("n", "<leader>fs",
     function()
         vim.lsp.buf.format()
@@ -10,46 +14,52 @@ vim.keymap.set("n", "<leader>fs",
 )
 vim.keymap.set("n", "<leader>fS",
     function()
-        local fb = require("telescope").extensions.file_browser
-        local fb_actions = require("telescope").extensions.file_browser.actions
-        local actions = require "telescope.actions"
-        local action_state = require "telescope.actions.state"
-        local action_set = require "telescope.actions.set"
-
-        local file_created = false
-        fb.file_browser({
-            attach_mappings = function(prompt_bufnr, _)
-                fb_actions.create_from_prompt:enhance({
-                    pre = function()
-                        file_created = true
+        Snacks.picker.explorer({
+            title = "Save As",
+            layout = {
+                layout = {
+                    backdrop = false,
+                    width = 0.5,
+                    min_width = 80,
+                    height = 0.4,
+                    min_height = 3,
+                    box = "vertical",
+                    border = "rounded",
+                    title = "{title}",
+                    title_pos = "center",
+                    { win = "list", border = "none" },
+                },
+            },
+            tree = false,
+            auto_close = true,
+            actions = {
+                custom_select = function(picker, item)
+                    if item.dir then
+                        picker:set_cwd(picker:dir())
+                        picker:find()
+                    else
+                        picker:close()
+                        vim.ui.select({ "Yes", "No" }, {
+                            prompt = "Are you sure you want to save as " .. item.file .. "?",
+                        }, function(choice)
+                            if choice == "Yes" then
+                                vim.cmd.saveas { item.file, bang = true, mods = { silent = true } }
+                            end
+                        end)
                     end
-                })
-                action_set.edit:replace(function(_, _)
-                    actions.close(prompt_bufnr)
-
-                    local entry = action_state.get_selected_entry()
-                    if not entry or not entry.path then
-                        return
-                    end
-
-                    vim.lsp.buf.format()
-                    if file_created then
-                        vim.cmd.saveas { entry.path, bang = true }
-                        return
-                    end
-
-                    vim.ui.select({ "Yes", "No" }, {
-                        prompt = "File " .. entry.path .. " exists; overwrite?",
-                    }, function(choice)
-                        if choice == "Yes" then
-                            vim.cmd.saveas { entry.path, bang = true, mods = { silent = true } }
-                        end
-                    end)
-                end)
-
-                return true
-            end
+                end,
+                custom_up = function(picker, item)
+                    picker:set_cwd(vim.fs.dirname(picker:cwd()))
+                    picker:find()
+                end
+            },
+            win = {
+                list = {
+                    keys = {
+                        ["<CR>"] = "custom_select",
+                        ["<BS>"] = "custom_up",
+                    }
+                }
+            }
         })
-    end,
-    { desc = "[S]ave as" }
-)
+    end, { desc = "Save As" })

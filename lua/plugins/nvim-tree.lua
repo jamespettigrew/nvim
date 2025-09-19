@@ -11,8 +11,7 @@ return {
   },
   config = function(_, opts)
     require("nvim-tree").setup(opts)
-
-    vim.keymap.set("n", "<leader>we", "<Cmd>:NvimTreeToggle<CR>", { desc = "Toggle Explorer (nvim-tree)" })
+    vim.keymap.set("n", "<leader>we", function() Snacks.picker.explorer() end, { desc = "Toggle Explorer (nvim-tree)" })
 
   end,
 }

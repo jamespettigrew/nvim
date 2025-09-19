@@ -1,4 +1,3 @@
-local t = require('telescope.builtin')
 local arena = require("arena")
 
 local function kill()
