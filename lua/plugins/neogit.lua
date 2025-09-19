@@ -45,6 +45,7 @@ return {
       kind = "floating",
     },
     integrations = {
+      telescope = false,
       snacks = true,
     },
   },
