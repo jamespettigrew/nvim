@@ -300,20 +300,7 @@ require('lazy').setup({
         -- ts_ls = {},
         --
 
-        lua_ls = {
-          -- cmd = { ... },
-          -- filetypes = { ... },
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
+        lua_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -699,6 +686,25 @@ vim.g.neovide_padding_bottom = 1
 vim.g.neovide_padding_right = 1
 vim.g.neovide_padding_left = 1
 vim.g.neovide_floating_corner_radius = 0.5
+vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
+
+vim.lsp.config("lua_ls", {
+    -- cmd = { ... },
+    -- filetypes = { ... },
+    -- capabilities = {},
+    settings = {
+      Lua = {
+        completion = {
+          callSnippet = 'Replace',
+        },
+        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+        diagnostics = {
+          disable = { 'missing-fields' },
+          globals = { 'vim' },
+        },
+      },
+    },
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
