@@ -150,6 +150,7 @@ function M.setup()
     function()
       Snacks.picker.projects({
         dev = { "~/code" },
+        recent = false,
         confirm = function(picker, item)
           picker:close()
           if not item then
