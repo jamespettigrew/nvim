@@ -1,5 +1,3 @@
-local arena = require("arena")
-
 local function kill()
   local bufnr = vim.api.nvim_get_current_buf()
   local buf_windows = vim.call("win_findbuf", bufnr)
@@ -18,7 +16,7 @@ local function kill()
 end
 
 --vim.keymap.set("n", "<leader>bk", kill, { desc = "[k]ill", silent = true })
-vim.keymap.set("n", "<leader>bl", arena.toggle, { desc = "[l]ist" })
+vim.keymap.set("n", "<leader>bl", function() Snacks.picker.buffers() end, { desc = "[l]ist" })
 vim.keymap.set("n", "<leader>bN", "<Cmd>enew<CR>", { desc = "[N]ew" })
 vim.keymap.set("n", "<leader>bn", "<Cmd>bnext<CR>", { desc = "[n]ext" })
 vim.keymap.set("n", "<leader>bp", "<Cmd>bprevious<CR>", { desc = "[p]revious" })
