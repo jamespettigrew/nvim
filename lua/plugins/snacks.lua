@@ -1,6 +1,10 @@
 return {
   "folke/snacks.nvim",
   priority = 1000,
+  dependencies = {
+    "nvim-mini/mini.icons",
+    "nvim-tree/nvim-web-devicons",
+  },
   lazy = false,
   ---@type snacks.Config
   opts = {
