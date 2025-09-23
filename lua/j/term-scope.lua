@@ -14,7 +14,7 @@ function M.on_tab_enter()
 end
 
 function M.on_tab_leave()
-  print("There were " .. #terms.get_all() .. " unhidden terminals")
+  -- print("There were " .. #terms.get_all() .. " unhidden terminals")
 
   local tab = vim.api.nvim_get_current_tabpage()
   local tab_terms = terms.get_all()
@@ -23,7 +23,7 @@ function M.on_tab_leave()
     term.hidden = true
   end
 
-  print("Hello! Now there are " .. #terms.get_all() .. " unhidden terminals")
+  -- print("Hello! Now there are " .. #terms.get_all() .. " unhidden terminals")
 end
 
 function M.setup()
