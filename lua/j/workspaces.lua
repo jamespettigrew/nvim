@@ -36,19 +36,6 @@ function M.switch_workspace()
 
 end
 
-function M.open_workspace(title, path)
-  for _, w in pairs(M._workspaces) do
-    if w.title == title then
-      M._focus_workspace(w)
-      return
-    end
-  end
-
-  vim.cmd.tabnew()
-  local w = M._create_workspace(title, path)
-  M._focus_workspace(w)
-end
-
 function M._previous_workspace()
   -- Pop from history stack until we find a workspace that hasn't been closed
   while #M._workspace_history > 0 do
@@ -145,7 +132,17 @@ function M.setup()
           local path = item.file
           local split = path:split('/')
           local title = split[#split]
-          M.open_workspace(title, path)
+  
+          for _, w in pairs(M._workspaces) do
+            if w.title == title then
+              M._focus_workspace(w)
+              return
+            end
+          end
+
+          vim.cmd.tabnew()
+          local w = M._create_workspace(title, path)
+          M._focus_workspace(w)
           Snacks.picker.git_files()
         end,
         title = "Workspaces",
