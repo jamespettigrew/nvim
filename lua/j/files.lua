@@ -1,6 +1,7 @@
 vim.keymap.set("n", "<leader>fb",
     function()
         Snacks.picker.explorer({
+            auto_close = true,
             layout = { preset = "select", preview = true },
         })
     end, { desc = "Find Files" })
