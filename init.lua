@@ -286,7 +286,6 @@ require('lazy').setup({
         -- jsonnet_ls = {},
         -- pyright = {},
         rust_analyzer = {},
-        slangd = {},
         -- svelte = {},
         -- tsserver = {},
         -- html = { filetypes = { 'html', 'twig', 'hbs'} },
@@ -372,7 +371,6 @@ require('lazy').setup({
         map('n', '<leader>ghD', function()
           gs.diffthis '~'
         end, { desc = 'git diff against last commit' })
-
         -- Toggles
         map('n', '<leader>gtb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
         map('n', '<leader>gtd', gs.toggle_deleted, { desc = 'toggle git show deleted' })
